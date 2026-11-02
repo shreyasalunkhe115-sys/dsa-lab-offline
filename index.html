@@ -1,0 +1,2284 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DSA Lab: Java Programs</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1d1b;--mut:#66665f;--card:#fff;--line:#e2e1da;--acc:#0b6b5d;--code:#f3f2ec;--okbg:#e6f3ef;--warn:#fff4dc;--warnfg:#6b4a00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151614;--fg:#ecece6;--mut:#a3a39a;--card:#1d1f1c;--line:#34362f;--acc:#5fcdb8;--code:#10110f;--okbg:#17302b;--warn:#3a2f10;--warnfg:#f0d58a}}
+:root[data-theme="dark"]{--bg:#151614;--fg:#ecece6;--mut:#a3a39a;--card:#1d1f1c;--line:#34362f;--acc:#5fcdb8;--code:#10110f;--okbg:#17302b;--warn:#3a2f10;--warnfg:#f0d58a}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header,main{max-width:860px;margin:0 auto;padding:0 16px}
+h1{font-size:1.6rem;margin:20px 0 4px}
+.sub{color:var(--mut);margin:0 0 14px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);z-index:5}
+nav a{min-width:34px;text-align:center;padding:4px 8px;border:1px solid var(--line);border-radius:8px;color:var(--acc);text-decoration:none;font-weight:600;background:var(--card)}
+section{margin:28px 0}
+h2{font-size:1.25rem;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.no{background:var(--acc);color:var(--bg);border-radius:8px;padding:0 10px;font-size:1rem}
+.aim{margin:0 0 8px;color:var(--mut)}
+.note{background:var(--warn);color:var(--warnfg);padding:8px 12px;border-radius:8px;margin:8px 0;font-size:.92rem}
+.prog{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:12px 0;overflow:hidden}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line)}
+.fn{font-family:ui-monospace,Consolas,monospace;font-weight:700}
+button.copy{background:var(--acc);color:var(--bg);border:0;border-radius:8px;padding:7px 14px;font-weight:600;cursor:pointer;font-size:.9rem}
+button.sm{padding:2px 8px;font-size:.78rem;margin-left:6px;background:transparent;color:var(--acc);border:1px solid var(--acc)}
+pre{margin:0;padding:12px;overflow-x:auto;background:var(--code);font:13px/1.45 ui-monospace,Consolas,monospace;tab-size:4}
+pre.code{max-height:420px;overflow:auto}
+.run{padding:10px 12px;font-size:.92rem;display:grid;gap:4px}
+.run code{background:var(--code);padding:1px 6px;border-radius:5px;font-family:ui-monospace,Consolas,monospace}
+details{border-top:1px solid var(--line)}
+summary{padding:10px 12px;cursor:pointer;font-weight:600;color:var(--acc)}
+pre.out{background:#0e0f0d;color:#d8f5c8;max-height:360px;overflow:auto}
+footer{max-width:860px;margin:30px auto;padding:0 16px;color:var(--mut);font-size:.85rem}
+</style></head><body>
+<header><h1>DSA Lab: 11 Java Programs</h1>
+<p class="sub">Tap Copy, paste into Notepad, save with the file name shown, then compile and run in Command Prompt.</p></header>
+<nav aria-label="Experiments"><a href="#e1">1</a><a href="#e2">2</a><a href="#e3">3</a><a href="#e4">4</a><a href="#e5">5</a><a href="#e6">6</a><a href="#e7">7</a><a href="#e8">8</a><a href="#e9">9</a><a href="#e10">10</a><a href="#e11">11</a></nav>
+<main><section id="e1"><h2><span class="no">1</span>Stack ADT</h2><p class="aim">Push, pop and display using an array and a linked list.</p><div class="prog">
+<div class="bar"><span class="fn">StackArrayDemo.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+class StackArray {
+
+    int stack[];
+
+    int top;
+
+    int size;
+
+    StackArray(int size) {
+
+        this.size = size;
+
+        stack = new int[size];
+
+        top = -1;
+
+    }
+
+    // Push operation
+
+    void push(int value) {
+
+        if (top == size - 1) {
+
+            System.out.println(&quot;Stack Overflow&quot;);
+
+        } else {
+
+            stack[++top] = value;
+
+            System.out.println(value + &quot; inserted into stack.&quot;);
+
+        }
+
+    }
+
+    // Pop operation
+
+    void pop() {
+
+        if (top == -1) {
+
+            System.out.println(&quot;Stack Underflow&quot;);
+
+        } else {
+
+            System.out.println(&quot;Deleted Element: &quot; + stack[top--]);
+
+        }
+
+    }
+
+    // Display operation
+
+    void display() {
+
+        if (top == -1) {
+
+            System.out.println(&quot;Stack is Empty&quot;);
+
+        } else {
+
+            System.out.println(&quot;Stack Elements:&quot;);
+
+            for (int i = top; i &gt;= 0; i--) {
+
+                System.out.println(stack[i]);
+
+            }        }
+
+    }  }
+
+public class StackArrayDemo {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter Stack Size: &quot;);
+
+        int size = sc.nextInt();
+
+        StackArray s = new StackArray(size);
+
+        while (true) {
+
+            System.out.println(&quot;\n1.Push&quot;);
+
+            System.out.println(&quot;2.Pop&quot;);
+
+            System.out.println(&quot;3.Display&quot;);
+
+            System.out.println(&quot;4.Exit&quot;);
+
+            System.out.print(&quot;Enter Choice: &quot;);
+
+            int ch = sc.nextInt();
+
+            switch (ch) {
+
+                case 1:
+
+                    System.out.print(&quot;Enter Element: &quot;);
+
+                    int value = sc.nextInt();
+
+                    s.push(value);
+
+                    break;
+
+                case 2:
+
+                    s.pop();
+
+                    break;
+
+                case 3:
+
+                    s.display();
+
+                    break;
+
+                case 4:
+
+                    System.out.println(&quot;Program Ended&quot;);
+
+                    System.exit(0);
+
+                default:
+
+                    System.out.println(&quot;Invalid Choice&quot;);
+
+            }         }
+
+    }}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>StackArrayDemo.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac StackArrayDemo.java</code> <button class="copy sm" data-c="javac StackArrayDemo.java">copy</button></div>
+<div><b>3.</b> <code>java StackArrayDemo</code> <button class="copy sm" data-c="java StackArrayDemo">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter Stack Size: 5
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 1
+Enter Element: 10
+10 inserted into stack.
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 1
+Enter Element: 20
+20 inserted into stack.
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 3
+Stack Elements:
+20
+10
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 2
+Deleted Element: 20
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 3
+Stack Elements:
+10
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 4
+Program Ended</pre></details>
+</div><div class="prog">
+<div class="bar"><span class="fn">StackLinkedListDemo.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+class Node {
+
+    int data;
+
+    Node next;
+
+    Node(int data) {
+
+        this.data = data;
+
+        next = null;
+
+    }
+
+}
+
+class StackLinkedList {
+
+    Node top = null;
+
+    // Push Operation
+
+    void push(int value) {
+
+        Node newNode = new Node(value);
+
+        newNode.next = top;
+
+        top = newNode;
+
+        System.out.println(value + &quot; inserted into stack.&quot;);
+
+    }
+
+    // Pop Operation
+
+    void pop() {
+
+        if (top == null) {
+
+            System.out.println(&quot;Stack Underflow&quot;);
+
+            return;
+
+        }
+
+        System.out.println(&quot;Deleted Element: &quot; + top.data);
+
+        top = top.next;
+
+    }
+
+    // Display Operation
+
+    void display() {
+
+        if (top == null) {
+
+            System.out.println(&quot;Stack is Empty&quot;);
+
+            return;
+
+        }
+
+        Node temp = top;
+
+        System.out.println(&quot;Stack Elements:&quot;);
+
+        while (temp != null) {
+
+            System.out.println(temp.data);
+
+            temp = temp.next;
+
+        }     }
+
+}
+
+public class StackLinkedListDemo {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        StackLinkedList s = new StackLinkedList();
+
+        while (true) {
+
+            System.out.println(&quot;\n1.Push&quot;);
+
+            System.out.println(&quot;2.Pop&quot;);
+
+            System.out.println(&quot;3.Display&quot;);
+
+            System.out.println(&quot;4.Exit&quot;);
+
+            System.out.print(&quot;Enter Choice: &quot;);
+
+            int ch = sc.nextInt();
+
+            switch (ch) {
+
+                case 1:
+
+                    System.out.print(&quot;Enter Element: &quot;);
+
+                    int value = sc.nextInt();
+
+                    s.push(value);
+
+                    break;
+
+                case 2:
+
+                    s.pop();
+
+                    break;
+
+                case 3:
+
+                    s.display();
+
+                    break;
+
+                case 4:
+
+                    System.out.println(&quot;Program Ended&quot;);
+
+                    System.exit(0);
+
+                default:
+
+                    System.out.println(&quot;Invalid Choice&quot;);
+
+            }        }
+
+    }           }
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>StackLinkedListDemo.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac StackLinkedListDemo.java</code> <button class="copy sm" data-c="javac StackLinkedListDemo.java">copy</button></div>
+<div><b>3.</b> <code>java StackLinkedListDemo</code> <button class="copy sm" data-c="java StackLinkedListDemo">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 1
+Enter Element: 15
+15 inserted into stack.
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 1
+Enter Element: 25
+25 inserted into stack.
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 3
+Stack Elements:
+25
+15
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 2
+Deleted Element: 25
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 3
+Stack Elements:
+15
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Choice: 4
+Program Ended</pre></details>
+</div></section><section id="e2"><h2><span class="no">2</span>Queue ADT</h2><p class="aim">Linear and circular queue: enqueue, dequeue, display.</p><p class="note">Your file was exp no. 2.txt. Because the class is public, save it as QueueDemo.java.</p><div class="prog">
+<div class="bar"><span class="fn">QueueDemo.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+class QueueADT {
+    static final int SIZE = 5;
+    int[] queue = new int[SIZE];
+    int front = -1, rear = -1;
+
+    // Linear Queue Enqueue
+    void linearEnqueue(int data) {
+        if (rear == SIZE - 1) {
+            System.out.println(&quot;Linear Queue Overflow&quot;);
+        } else {
+            if (front == -1)
+                front = 0;
+            queue[++rear] = data;
+            System.out.println(data + &quot; inserted.&quot;);
+        }
+    }
+
+    // Linear Queue Dequeue
+    void linearDequeue() {
+        if (front == -1 || front &gt; rear) {
+            System.out.println(&quot;Linear Queue Underflow&quot;);
+        } else {
+            System.out.println(&quot;Deleted: &quot; + queue[front++]);
+        }
+    }
+
+    // Linear Queue Display
+    void linearDisplay() {
+        if (front == -1 || front &gt; rear) {
+            System.out.println(&quot;Queue is Empty&quot;);
+        } else {
+            System.out.print(&quot;Linear Queue: &quot;);
+            for (int i = front; i &lt;= rear; i++)
+                System.out.print(queue[i] + &quot; &quot;);
+            System.out.println();
+        }
+    }
+}
+
+class CircularQueue {
+    static final int SIZE = 5;
+    int[] queue = new int[SIZE];
+    int front = -1, rear = -1;
+
+    // Circular Queue Enqueue
+    void enqueue(int data) {
+        if ((rear + 1) % SIZE == front) {
+            System.out.println(&quot;Circular Queue Overflow&quot;);
+        } else {
+            if (front == -1)
+                front = 0;
+            rear = (rear + 1) % SIZE;
+            queue[rear] = data;
+            System.out.println(data + &quot; inserted.&quot;);
+        }
+    }
+
+    // Circular Queue Dequeue
+    void dequeue() {
+        if (front == -1) {
+            System.out.println(&quot;Circular Queue Underflow&quot;);
+        } else {
+            System.out.println(&quot;Deleted: &quot; + queue[front]);
+
+            if (front == rear) {
+                front = rear = -1;
+            } else {
+                front = (front + 1) % SIZE;
+            }
+        }
+    }
+
+    // Circular Queue Display
+    void display() {
+        if (front == -1) {
+            System.out.println(&quot;Queue is Empty&quot;);
+            return;
+        }
+
+        System.out.print(&quot;Circular Queue: &quot;);
+        int i = front;
+        while (true) {
+            System.out.print(queue[i] + &quot; &quot;);
+            if (i == rear)
+                break;
+            i = (i + 1) % SIZE;
+        }
+        System.out.println();
+    }
+}
+
+public class QueueDemo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        QueueADT linear = new QueueADT();
+        CircularQueue circular = new CircularQueue();
+
+        int choice, value;
+
+        do {
+            System.out.println(&quot;\n--- Queue ADT Menu ---&quot;);
+            System.out.println(&quot;1. Linear Enqueue&quot;);
+            System.out.println(&quot;2. Linear Dequeue&quot;);
+            System.out.println(&quot;3. Linear Display&quot;);
+            System.out.println(&quot;4. Circular Enqueue&quot;);
+            System.out.println(&quot;5. Circular Dequeue&quot;);
+            System.out.println(&quot;6. Circular Display&quot;);
+            System.out.println(&quot;7. Exit&quot;);
+            System.out.print(&quot;Enter your choice: &quot;);
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print(&quot;Enter value: &quot;);
+                    value = sc.nextInt();
+                    linear.linearEnqueue(value);
+                    break;
+
+                case 2:
+                    linear.linearDequeue();
+                    break;
+
+                case 3:
+                    linear.linearDisplay();
+                    break;
+
+                case 4:
+                    System.out.print(&quot;Enter value: &quot;);
+                    value = sc.nextInt();
+                    circular.enqueue(value);
+                    break;
+
+                case 5:
+                    circular.dequeue();
+                    break;
+
+                case 6:
+                    circular.display();
+                    break;
+
+                case 7:
+                    System.out.println(&quot;Program Ended.&quot;);
+                    break;
+
+                default:
+                    System.out.println(&quot;Invalid Choice&quot;);
+            }
+        } while (choice != 7);
+
+        sc.close();
+    }
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>QueueDemo.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac QueueDemo.java</code> <button class="copy sm" data-c="javac QueueDemo.java">copy</button></div>
+<div><b>3.</b> <code>java QueueDemo</code> <button class="copy sm" data-c="java QueueDemo">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 1
+Enter value: 10
+10 inserted.
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 1
+Enter value: 20
+20 inserted.
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 1
+Enter value: 30
+30 inserted.
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 3
+Linear Queue: 10 20 30 
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 2
+Deleted: 10
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 3
+Linear Queue: 20 30 
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 4
+Enter value: 40
+40 inserted.
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 4
+Enter value: 50
+50 inserted.
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 6
+Circular Queue: 40 50 
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 5
+Deleted: 40
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 6
+Circular Queue: 50 
+
+--- Queue ADT Menu ---
+1. Linear Enqueue
+2. Linear Dequeue
+3. Linear Display
+4. Circular Enqueue
+5. Circular Dequeue
+6. Circular Display
+7. Exit
+Enter your choice: 7
+Program Ended.</pre></details>
+</div></section><section id="e3"><h2><span class="no">3</span>Queue application: Round Robin scheduling</h2><p class="aim">CPU scheduling with a time quantum.</p><p class="note">Fixed: your original had no main method, so java could not start it. I added main and used a real Queue. The results match your sample output.</p><div class="prog">
+<div class="bar"><span class="fn">RoundRobinScheduling.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.*;
+
+public class RoundRobinScheduling {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter Number of Processes: &quot;);
+        int n = sc.nextInt();
+
+        int[] burstTime = new int[n];
+        int[] remainingTime = new int[n];
+        int[] waitingTime = new int[n];
+        int[] turnaroundTime = new int[n];
+
+        System.out.println(&quot;Enter Burst Time of Processes:&quot;);
+        for (int i = 0; i &lt; n; i++) {
+            System.out.print(&quot;P&quot; + (i + 1) + &quot;: &quot;);
+            burstTime[i] = sc.nextInt();
+            remainingTime[i] = burstTime[i];
+        }
+
+        System.out.print(&quot;Enter Time Quantum: &quot;);
+        int quantum = sc.nextInt();
+
+        // Ready queue holds process indices (FIFO)
+        Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();
+        for (int i = 0; i &lt; n; i++)
+            queue.add(i);
+
+        int time = 0;
+
+        while (!queue.isEmpty()) {
+            int i = queue.poll();
+
+            if (remainingTime[i] &gt; quantum) {
+                time += quantum;
+                remainingTime[i] -= quantum;
+                queue.add(i);                 // back to end of queue
+            } else {
+                time += remainingTime[i];
+                remainingTime[i] = 0;
+                turnaroundTime[i] = time;     // all arrive at time 0
+                waitingTime[i] = time - burstTime[i];
+            }
+        }
+
+        double totalWT = 0, totalTAT = 0;
+
+        System.out.println(&quot;\nProcess\tBurst\tWaiting\tTurnaround&quot;);
+        for (int i = 0; i &lt; n; i++) {
+            totalWT += waitingTime[i];
+            totalTAT += turnaroundTime[i];
+            System.out.println(&quot;P&quot; + (i + 1) + &quot;\t&quot; + burstTime[i] + &quot;\t&quot;
+                    + waitingTime[i] + &quot;\t&quot; + turnaroundTime[i]);
+        }
+
+        System.out.printf(&quot;\nAverage Waiting Time = %.2f&quot;, totalWT / n);
+        System.out.printf(&quot;\nAverage Turnaround Time = %.2f\n&quot;, totalTAT / n);
+
+        sc.close();
+    }
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>RoundRobinScheduling.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac RoundRobinScheduling.java</code> <button class="copy sm" data-c="javac RoundRobinScheduling.java">copy</button></div>
+<div><b>3.</b> <code>java RoundRobinScheduling</code> <button class="copy sm" data-c="java RoundRobinScheduling">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter Number of Processes: 4
+Enter Burst Time of Processes:
+P1: 10
+P2: 5
+P3: 8
+P4: 6
+Enter Time Quantum: 3
+
+Process	Burst	Waiting	Turnaround
+P1	10	19	29
+P2	5	12	17
+P3	8	20	28
+P4	6	17	23
+
+Average Waiting Time = 17.00
+Average Turnaround Time = 24.25</pre></details>
+</div></section><section id="e4"><h2><span class="no">4</span>Hashing with chaining</h2><p class="aim">Hash table with collision resolution by chaining.</p><div class="prog">
+<div class="bar"><span class="fn">HashingChaining.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+class Node {
+
+    int key;
+
+    Node next;
+
+    Node(int key) {
+
+        this.key = key;
+
+        next = null;
+
+    }
+
+}
+
+class HashTable {
+
+    private Node[] table;
+
+    private int size;
+
+    HashTable(int size) {
+
+        this.size = size;
+
+        table = new Node[size];
+
+    }
+
+    private int hashFunction(int key) {
+
+        return key % size;
+
+    }
+
+    // Insert
+
+    public void insert(int key) {
+
+        int index = hashFunction(key);
+
+        Node newNode = new Node(key);
+
+        if (table[index] == null) {
+
+            table[index] = newNode;
+
+        } else {
+
+            Node temp = table[index];
+
+            while (temp.next != null) {
+
+                temp = temp.next;
+
+            }
+
+            temp.next = newNode;
+
+        }
+
+        System.out.println(key + &quot; inserted successfully.&quot;);
+
+    }
+
+    // Search
+
+    public void search(int key) {
+
+        int index = hashFunction(key);
+
+        Node temp = table[index];
+
+        while (temp != null) {
+
+            if (temp.key == key) {
+
+                System.out.println(key + &quot; found.&quot;);
+
+                return;
+
+            }
+
+            temp = temp.next;
+
+        }
+
+        System.out.println(key + &quot; not found.&quot;);
+
+    }
+
+    // Delete
+
+    public void delete(int key) {
+
+        int index = hashFunction(key);
+
+        Node temp = table[index];
+
+        Node prev = null;
+
+        while (temp != null &amp;&amp; temp.key != key) {
+
+            prev = temp;
+
+            temp = temp.next;
+
+        }
+
+        if (temp == null) {
+
+            System.out.println(&quot;Key not found.&quot;);
+
+            return;
+
+        }
+
+        if (prev == null) {
+
+            table[index] = temp.next;
+
+        } else {
+
+            prev.next = temp.next;
+
+        }
+
+        System.out.println(key + &quot; deleted successfully.&quot;);
+
+    }
+
+    // Display
+
+    public void display() {
+
+        System.out.println(&quot;\nHash Table:&quot;);
+
+        for (int i = 0; i &lt; size; i++) {
+
+            System.out.print(i + &quot; --&gt; &quot;);
+
+            Node temp = table[i];
+
+            while (temp != null) {
+
+                System.out.print(temp.key + &quot; -&gt; &quot;);
+
+                temp = temp.next;
+
+            }
+
+            System.out.println(&quot;NULL&quot;);
+
+        }
+
+    }
+
+}
+
+public class HashingChaining {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        HashTable hash = new HashTable(10);
+
+        int choice, key;
+
+        do {
+
+            System.out.println(&quot;\n------ HASH TABLE ------&quot;);
+
+            System.out.println(&quot;1.Insert&quot;);
+
+            System.out.println(&quot;2.Search&quot;);
+
+            System.out.println(&quot;3.Delete&quot;);
+
+            System.out.println(&quot;4.Display&quot;);
+
+            System.out.println(&quot;5.Exit&quot;);
+
+            System.out.print(&quot;Enter Choice : &quot;);
+
+            choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+
+                    System.out.print(&quot;Enter Key : &quot;);
+
+                    key = sc.nextInt();
+
+                    hash.insert(key);
+
+                    break;
+
+                case 2:
+
+                    System.out.print(&quot;Enter Key : &quot;);
+
+                    key = sc.nextInt();
+
+                    hash.search(key);
+
+                    break;
+
+                case 3:
+
+                    System.out.print(&quot;Enter Key : &quot;);
+
+                    key = sc.nextInt();
+
+                    hash.delete(key);
+
+                    break;
+
+                case 4:
+
+                    hash.display();
+
+                    break;
+
+                case 5:
+
+                    System.out.println(&quot;Program Terminated.&quot;);
+
+                    break;
+
+                default:
+
+                    System.out.println(&quot;Invalid Choice&quot;);
+
+            }
+
+        } while (choice != 5);
+
+        sc.close();
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>HashingChaining.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac HashingChaining.java</code> <button class="copy sm" data-c="javac HashingChaining.java">copy</button></div>
+<div><b>3.</b> <code>java HashingChaining</code> <button class="copy sm" data-c="java HashingChaining">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">------ HASH TABLE ------
+1.Insert
+2.Search
+3.Delete
+4.Display
+5.Exit
+Enter Choice : 1
+Enter Key : 25
+25 inserted successfully.
+
+------ HASH TABLE ------
+1.Insert
+2.Search
+3.Delete
+4.Display
+5.Exit
+Enter Choice : 1
+Enter Key : 35
+35 inserted successfully.
+
+------ HASH TABLE ------
+1.Insert
+2.Search
+3.Delete
+4.Display
+5.Exit
+Enter Choice : 1
+Enter Key : 45
+45 inserted successfully.
+
+------ HASH TABLE ------
+1.Insert
+2.Search
+3.Delete
+4.Display
+5.Exit
+Enter Choice : 4
+
+Hash Table:
+0 --&gt; NULL
+1 --&gt; NULL
+2 --&gt; NULL
+3 --&gt; NULL
+4 --&gt; NULL
+5 --&gt; 25 -&gt; 35 -&gt; 45 -&gt; NULL
+6 --&gt; NULL
+7 --&gt; NULL
+8 --&gt; NULL
+9 --&gt; NULL
+
+------ HASH TABLE ------
+1.Insert
+2.Search
+3.Delete
+4.Display
+5.Exit
+Enter Choice : 2
+Enter Key : 35
+35 found.
+
+------ HASH TABLE ------
+1.Insert
+2.Search
+3.Delete
+4.Display
+5.Exit
+Enter Choice : 3
+Enter Key : 35
+35 deleted successfully.
+
+------ HASH TABLE ------
+1.Insert
+2.Search
+3.Delete
+4.Display
+5.Exit
+Enter Choice : 4
+
+Hash Table:
+0 --&gt; NULL
+1 --&gt; NULL
+2 --&gt; NULL
+3 --&gt; NULL
+4 --&gt; NULL
+5 --&gt; 25 -&gt; 45 -&gt; NULL
+6 --&gt; NULL
+7 --&gt; NULL
+8 --&gt; NULL
+9 --&gt; NULL
+
+------ HASH TABLE ------
+1.Insert
+2.Search
+3.Delete
+4.Display
+5.Exit
+Enter Choice : 5
+Program Terminated.</pre></details>
+</div></section><section id="e5"><h2><span class="no">5</span>Binary Search Tree</h2><p class="aim">Insert, delete, search, traversals, level order and height.</p><div class="prog">
+<div class="bar"><span class="fn">Exp05_BST.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.*;
+
+/** Experiment 5: Binary Search Tree (BST) Abstract Data Type in Java. */
+public class Exp05_BST {
+
+    static class Node {
+        int data; Node left, right;
+        Node(int d) { data = d; }
+    }
+
+    private Node root;
+
+    Node insert(Node node, int key) {
+        if (node == null) return new Node(key);
+        if (key &lt; node.data) node.left = insert(node.left, key);
+        else if (key &gt; node.data) node.right = insert(node.right, key);
+        else System.out.println(&quot;Duplicate key ignored.&quot;);
+        return node;
+    }
+
+    boolean search(Node node, int key) {
+        if (node == null) return false;
+        if (key == node.data) return true;
+        return key &lt; node.data ? search(node.left, key) : search(node.right, key);
+    }
+
+    Node minNode(Node n) { while (n.left != null) n = n.left; return n; }
+
+    Node delete(Node node, int key) {
+        if (node == null) { System.out.println(&quot;Key not found.&quot;); return null; }
+        if (key &lt; node.data) node.left = delete(node.left, key);
+        else if (key &gt; node.data) node.right = delete(node.right, key);
+        else {
+            if (node.left == null) return node.right;      // 0 or 1 child
+            if (node.right == null) return node.left;
+            Node succ = minNode(node.right);                // 2 children
+            node.data = succ.data;
+            node.right = delete(node.right, succ.data);
+        }
+        return node;
+    }
+
+    void inorder(Node n)   { if (n != null) { inorder(n.left); System.out.print(n.data + &quot; &quot;); inorder(n.right); } }
+    void preorder(Node n)  { if (n != null) { System.out.print(n.data + &quot; &quot;); preorder(n.left); preorder(n.right); } }
+    void postorder(Node n) { if (n != null) { postorder(n.left); postorder(n.right); System.out.print(n.data + &quot; &quot;); } }
+
+    int height(Node n) { return n == null ? 0 : 1 + Math.max(height(n.left), height(n.right)); }
+
+    void levelOrder() {
+        if (root == null) { System.out.println(&quot;Tree is empty.&quot;); return; }
+        Queue&lt;Node&gt; q = new LinkedList&lt;&gt;();
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node n = q.poll();
+            System.out.print(n.data + &quot; &quot;);
+            if (n.left != null) q.add(n.left);
+            if (n.right != null) q.add(n.right);
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Exp05_BST t = new Exp05_BST();
+        int ch;
+        do {
+            System.out.println(&quot;\n--- BST MENU ---&quot;);
+            System.out.println(&quot;1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit&quot;);
+            System.out.print(&quot;Choice: &quot;);
+            ch = sc.nextInt();
+            switch (ch) {
+                case 1: System.out.print(&quot;Value: &quot;); t.root = t.insert(t.root, sc.nextInt()); break;
+                case 2: System.out.print(&quot;Value: &quot;); t.root = t.delete(t.root, sc.nextInt()); break;
+                case 3: System.out.print(&quot;Value: &quot;); System.out.println(t.search(t.root, sc.nextInt()) ? &quot;Found&quot; : &quot;Not found&quot;); break;
+                case 4: System.out.print(&quot;Inorder: &quot;);   t.inorder(t.root);   System.out.println(); break;
+                case 5: System.out.print(&quot;Preorder: &quot;);  t.preorder(t.root);  System.out.println(); break;
+                case 6: System.out.print(&quot;Postorder: &quot;); t.postorder(t.root); System.out.println(); break;
+                case 7: System.out.print(&quot;Level order: &quot;); t.levelOrder(); break;
+                case 8: System.out.println(&quot;Height = &quot; + t.height(t.root)); break;
+                case 0: System.out.println(&quot;Exiting...&quot;); break;
+                default: System.out.println(&quot;Invalid choice!&quot;);
+            }
+        } while (ch != 0);
+        sc.close();
+    }
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>Exp05_BST.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac Exp05_BST.java</code> <button class="copy sm" data-c="javac Exp05_BST.java">copy</button></div>
+<div><b>3.</b> <code>java Exp05_BST</code> <button class="copy sm" data-c="java Exp05_BST">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 1
+Value: 50
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 1
+Value: 30
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 1
+Value: 70
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 1
+Value: 20
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 1
+Value: 40
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 1
+Value: 60
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 4
+Inorder: 20 30 40 50 60 70 
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 5
+Preorder: 50 30 20 40 70 60 
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 6
+Postorder: 20 40 30 60 70 50 
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 7
+Level order: 50 30 70 20 40 60 
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 8
+Height = 3
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 3
+Value: 40
+Found
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 2
+Value: 30
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 4
+Inorder: 20 40 50 60 70 
+
+--- BST MENU ---
+1.Insert 2.Delete 3.Search 4.Inorder 5.Preorder 6.Postorder 7.Level Order 8.Height 0.Exit
+Choice: 0
+Exiting...</pre></details>
+</div></section><section id="e6"><h2><span class="no">6</span>BFS traversal</h2><p class="aim">Breadth-first search using an adjacency matrix and an adjacency list.</p><p class="note">The graph is built into the program, so there is no input.</p><div class="prog">
+<div class="bar"><span class="fn">BFSMatrix.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.*;
+
+public class BFSMatrix {
+
+    private int vertices;
+
+    private int[][] matrix;
+
+    public BFSMatrix(int vertices) {
+
+        this.vertices = vertices;
+
+        matrix = new int[vertices][vertices];
+
+    }
+
+    public void addEdge(int source, int destination) {
+
+        matrix[source][destination] = 1;
+
+        matrix[destination][source] = 1;
+
+    }
+
+    public void bfs(int start) {
+
+        boolean[] visited = new boolean[vertices];
+
+        Queue&lt;Integer&gt; queue = new LinkedList&lt;&gt;();
+
+        visited[start] = true;
+
+        queue.add(start);
+
+        System.out.print(&quot;BFS Traversal : &quot;);
+
+        while (!queue.isEmpty()) {
+
+            int node = queue.poll();
+
+            System.out.print(node + &quot; &quot;);
+
+            for (int i = 0; i &lt; vertices; i++) {
+
+                if (matrix[node][i] == 1 &amp;&amp; !visited[i]) {
+
+                    visited[i] = true;
+
+                    queue.add(i);
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public static void main(String args[]) {
+
+        BFSMatrix graph = new BFSMatrix(6);
+
+        graph.addEdge(0,1);
+
+        graph.addEdge(0,2);
+
+        graph.addEdge(1,3);
+
+        graph.addEdge(1,4);
+
+        graph.addEdge(2,5);
+
+        graph.addEdge(4,5);
+
+        graph.bfs(0);
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>BFSMatrix.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac BFSMatrix.java</code> <button class="copy sm" data-c="javac BFSMatrix.java">copy</button></div>
+<div><b>3.</b> <code>java BFSMatrix</code> <button class="copy sm" data-c="java BFSMatrix">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">BFS Traversal : 0 1 2 3 4 5 </pre></details>
+</div><div class="prog">
+<div class="bar"><span class="fn">BFSAdjacencyList.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.*;
+
+public class BFSAdjacencyList {
+
+    private int vertices;
+
+    private LinkedList&lt;Integer&gt;[] adjList;
+
+    public BFSAdjacencyList(int vertices) {
+
+        this.vertices = vertices;
+
+        adjList = new LinkedList[vertices];
+
+        for(int i=0;i&lt;vertices;i++)
+
+            adjList[i]=new LinkedList&lt;&gt;();
+
+    }
+
+    public void addEdge(int source,int destination){
+
+        adjList[source].add(destination);
+
+        adjList[destination].add(source);
+
+    }
+
+    public void bfs(int start){
+
+        boolean visited[]=new boolean[vertices];
+
+        Queue&lt;Integer&gt; queue=new LinkedList&lt;&gt;();
+
+        visited[start]=true;
+
+        queue.add(start);
+
+        System.out.print(&quot;BFS Traversal : &quot;);
+
+        while(!queue.isEmpty()){
+
+            int current=queue.poll();
+
+            System.out.print(current+&quot; &quot;);
+
+            for(int neighbour:adjList[current]){
+
+                if(!visited[neighbour]){
+
+                    visited[neighbour]=true;
+
+                    queue.add(neighbour);
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public static void main(String args[]){
+
+        BFSAdjacencyList graph=new BFSAdjacencyList(6);
+
+        graph.addEdge(0,1);
+
+        graph.addEdge(0,2);
+
+        graph.addEdge(1,3);
+
+        graph.addEdge(1,4);
+
+        graph.addEdge(2,5);
+
+        graph.addEdge(4,5);
+
+        graph.bfs(0);
+
+    }}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>BFSAdjacencyList.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac BFSAdjacencyList.java</code> <button class="copy sm" data-c="javac BFSAdjacencyList.java">copy</button></div>
+<div><b>3.</b> <code>java BFSAdjacencyList</code> <button class="copy sm" data-c="java BFSAdjacencyList">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">BFS Traversal : 0 1 2 3 4 5 </pre></details>
+</div></section><section id="e7"><h2><span class="no">7</span>DFS traversal</h2><p class="aim">Depth-first search using an adjacency matrix and an adjacency list.</p><div class="prog">
+<div class="bar"><span class="fn">DFSMatrix.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+public class DFSMatrix {
+
+    static int[][] graph;
+
+    static boolean[] visited;
+
+    static int vertices;
+
+    static void dfs(int vertex) {
+
+        visited[vertex] = true;
+
+        System.out.print(vertex + &quot; &quot;);
+
+        for (int i = 0; i &lt; vertices; i++) {
+
+            if (graph[vertex][i] == 1 &amp;&amp; !visited[i]) {
+
+                dfs(i);
+
+            }
+
+        }
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter Number of Vertices: &quot;);
+
+        vertices = sc.nextInt();
+
+        graph = new int[vertices][vertices];
+
+        visited = new boolean[vertices];
+
+        System.out.println(&quot;Enter Adjacency Matrix:&quot;);
+
+        for (int i = 0; i &lt; vertices; i++) {
+
+            for (int j = 0; j &lt; vertices; j++) {
+
+                graph[i][j] = sc.nextInt();
+
+            }
+
+        }
+
+        System.out.print(&quot;Enter Starting Vertex: &quot;);
+
+        int start = sc.nextInt();
+
+        System.out.println(&quot;\nDFS Traversal:&quot;);
+
+        dfs(start);
+
+        sc.close();
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>DFSMatrix.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac DFSMatrix.java</code> <button class="copy sm" data-c="javac DFSMatrix.java">copy</button></div>
+<div><b>3.</b> <code>java DFSMatrix</code> <button class="copy sm" data-c="java DFSMatrix">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter Number of Vertices: 5
+Enter Adjacency Matrix:
+0
+1
+1
+0
+0
+1
+0
+0
+1
+0
+1
+0
+0
+0
+1
+0
+0
+0
+1
+0
+0
+0
+1
+0
+0
+Enter Starting Vertex: 0
+
+DFS Traversal:
+0 1 3 2 4 </pre></details>
+</div><div class="prog">
+<div class="bar"><span class="fn">DFSAdjList.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.*;
+
+public class DFSAdjList {
+
+    static ArrayList&lt;ArrayList&lt;Integer&gt;&gt; graph;
+
+    static boolean[] visited;
+
+    static void dfs(int vertex) {
+
+        visited[vertex] = true;
+
+        System.out.print(vertex + &quot; &quot;);
+
+        for (int neighbour : graph.get(vertex)) {
+
+            if (!visited[neighbour]) {
+
+                dfs(neighbour);
+
+            }
+
+        }
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter Number of Vertices: &quot;);
+
+        int vertices = sc.nextInt();
+
+        graph = new ArrayList&lt;&gt;();
+
+        for (int i = 0; i &lt; vertices; i++) {
+
+            graph.add(new ArrayList&lt;&gt;());
+
+        }
+
+        visited = new boolean[vertices];
+
+        System.out.print(&quot;Enter Number of Edges: &quot;);
+
+        int edges = sc.nextInt();
+
+        System.out.println(&quot;Enter Edges:&quot;);
+
+        for (int i = 0; i &lt; edges; i++) {
+
+            int u = sc.nextInt();
+
+            int v = sc.nextInt();
+
+            graph.get(u).add(v);
+
+            graph.get(v).add(u);
+
+        }
+
+        System.out.print(&quot;Enter Starting Vertex: &quot;);
+
+        int start = sc.nextInt();
+
+        System.out.println(&quot;\nDFS Traversal:&quot;);
+
+        dfs(start);
+
+        sc.close();
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>DFSAdjList.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac DFSAdjList.java</code> <button class="copy sm" data-c="javac DFSAdjList.java">copy</button></div>
+<div><b>3.</b> <code>java DFSAdjList</code> <button class="copy sm" data-c="java DFSAdjList">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter Number of Vertices: 5
+Enter Number of Edges: 4
+Enter Edges:
+0
+1
+0
+2
+1
+3
+2
+4
+Enter Starting Vertex: 0
+
+DFS Traversal:
+0 1 3 2 4 </pre></details>
+</div></section><section id="e8"><h2><span class="no">8</span>Linear search</h2><p class="aim">Search an array one element at a time.</p><div class="prog">
+<div class="bar"><span class="fn">LinearSearch.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+public class LinearSearch {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter number of elements: &quot;);
+
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+
+        System.out.println(&quot;Enter array elements:&quot;);
+
+        for(int i = 0; i &lt; n; i++) {
+
+            arr[i] = sc.nextInt();
+
+        }
+
+        System.out.print(&quot;Enter element to search: &quot;);
+
+        int key = sc.nextInt();
+
+        int position = -1;
+
+        for(int i = 0; i &lt; n; i++) {
+
+            if(arr[i] == key) {
+
+                position = i;
+
+                break;
+
+            }
+
+        }
+
+        if(position != -1)
+
+            System.out.println(&quot;Element found at position: &quot; + (position + 1));
+
+        else
+
+            System.out.println(&quot;Element not found.&quot;);
+
+        sc.close();
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>LinearSearch.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac LinearSearch.java</code> <button class="copy sm" data-c="javac LinearSearch.java">copy</button></div>
+<div><b>3.</b> <code>java LinearSearch</code> <button class="copy sm" data-c="java LinearSearch">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter number of elements: 5
+Enter array elements:
+10
+20
+30
+40
+50
+Enter element to search: 30
+Element found at position: 3</pre></details>
+</div></section><section id="e9"><h2><span class="no">9</span>Binary search</h2><p class="aim">Search a sorted array by halving the range.</p><p class="note">The array must be entered in sorted order.</p><div class="prog">
+<div class="bar"><span class="fn">BinarySearchDemo.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+public class BinarySearchDemo {
+
+    public static int binarySearch(int arr[], int key) {
+
+        int low = 0;
+
+        int high = arr.length - 1;
+
+        while (low &lt;= high) {
+
+            int mid = (low + high) / 2;
+
+            if (arr[mid] == key)
+
+                return mid;
+
+            else if (key &lt; arr[mid])
+
+                high = mid - 1;
+
+            else
+
+                low = mid + 1;
+
+        }
+
+        return -1;
+
+    }
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter number of elements: &quot;);
+
+        int n = sc.nextInt();
+
+        int arr[] = new int[n];
+
+        System.out.println(&quot;Enter sorted array elements:&quot;);
+
+        for (int i = 0; i &lt; n; i++) {
+
+            arr[i] = sc.nextInt();
+
+        }
+
+        System.out.print(&quot;Enter element to search: &quot;);
+
+        int key = sc.nextInt();
+
+        int result = binarySearch(arr, key);
+
+        if (result != -1)
+
+            System.out.println(&quot;Element found at index: &quot; + result);
+
+        else
+
+            System.out.println(&quot;Element not found.&quot;);
+
+        sc.close();
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>BinarySearchDemo.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac BinarySearchDemo.java</code> <button class="copy sm" data-c="javac BinarySearchDemo.java">copy</button></div>
+<div><b>3.</b> <code>java BinarySearchDemo</code> <button class="copy sm" data-c="java BinarySearchDemo">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter number of elements: 5
+Enter sorted array elements:
+10
+20
+30
+40
+50
+Enter element to search: 40
+Element found at index: 3</pre></details>
+</div></section><section id="e10"><h2><span class="no">10</span>Bubble and selection sort</h2><p class="aim">Two simple O(n²) sorts.</p><div class="prog">
+<div class="bar"><span class="fn">BubbleSort.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+public class BubbleSort {
+
+    public static void bubbleSort(int arr[]) {
+
+        int n = arr.length;
+
+        for (int i = 0; i &lt; n - 1; i++) {
+
+            boolean swapped = false;
+
+            for (int j = 0; j &lt; n - i - 1; j++) {
+
+                if (arr[j] &gt; arr[j + 1]) {
+
+                    int temp = arr[j];
+
+                    arr[j] = arr[j + 1];
+
+                    arr[j + 1] = temp;
+
+                    swapped = true;
+
+                }
+
+            }
+
+            if (!swapped)
+
+                break;
+
+        }
+
+    }
+
+    public static void display(int arr[]) {
+
+        for (int num : arr)
+
+            System.out.print(num + &quot; &quot;);
+
+        System.out.println();
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter number of elements: &quot;);
+
+        int n = sc.nextInt();
+
+        int arr[] = new int[n];
+
+        System.out.println(&quot;Enter Elements:&quot;);
+
+        for (int i = 0; i &lt; n; i++)
+
+            arr[i] = sc.nextInt();
+
+        System.out.println(&quot;\nOriginal Array:&quot;);
+
+        display(arr);
+
+        bubbleSort(arr);
+
+        System.out.println(&quot;Sorted Array:&quot;);
+
+        display(arr);
+
+        sc.close();
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>BubbleSort.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac BubbleSort.java</code> <button class="copy sm" data-c="javac BubbleSort.java">copy</button></div>
+<div><b>3.</b> <code>java BubbleSort</code> <button class="copy sm" data-c="java BubbleSort">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter number of elements: 5
+Enter Elements:
+64
+25
+12
+22
+11
+
+Original Array:
+64 25 12 22 11 
+Sorted Array:
+11 12 22 25 64 </pre></details>
+</div><div class="prog">
+<div class="bar"><span class="fn">SelectionSort.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+public class SelectionSort {
+
+    public static void selectionSort(int arr[]) {
+
+        int n = arr.length;
+
+        for (int i = 0; i &lt; n - 1; i++) {
+
+            int minIndex = i;
+
+            for (int j = i + 1; j &lt; n; j++) {
+
+                if (arr[j] &lt; arr[minIndex]) {
+
+                    minIndex = j;
+
+                }
+
+            }
+
+            int temp = arr[minIndex];
+
+            arr[minIndex] = arr[i];
+
+            arr[i] = temp;
+
+        }
+
+    }
+
+    public static void display(int arr[]) {
+
+        for (int num : arr)
+
+            System.out.print(num + &quot; &quot;);
+
+        System.out.println();
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter number of elements: &quot;);
+
+        int n = sc.nextInt();
+
+        int arr[] = new int[n];
+
+        System.out.println(&quot;Enter Elements:&quot;);
+
+        for (int i = 0; i &lt; n; i++)
+
+            arr[i] = sc.nextInt();
+
+        System.out.println(&quot;\nOriginal Array:&quot;);
+
+        display(arr);
+
+        selectionSort(arr);
+
+        System.out.println(&quot;Sorted Array:&quot;);
+
+        display(arr);
+
+        sc.close();
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>SelectionSort.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac SelectionSort.java</code> <button class="copy sm" data-c="javac SelectionSort.java">copy</button></div>
+<div><b>3.</b> <code>java SelectionSort</code> <button class="copy sm" data-c="java SelectionSort">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter number of elements: 5
+Enter Elements:
+64
+25
+12
+22
+11
+
+Original Array:
+64 25 12 22 11 
+Sorted Array:
+11 12 22 25 64 </pre></details>
+</div></section><section id="e11"><h2><span class="no">11</span>Merge and quick sort</h2><p class="aim">Two divide-and-conquer sorts.</p><div class="prog">
+<div class="bar"><span class="fn">MergeSort.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+public class MergeSort {
+
+    void merge(int arr[], int l, int m, int r) {
+
+        int n1 = m - l + 1;
+
+        int n2 = r - m;
+
+        int L[] = new int[n1];
+
+        int R[] = new int[n2];
+
+        for (int i = 0; i &lt; n1; i++)
+
+            L[i] = arr[l + i];
+
+        for (int j = 0; j &lt; n2; j++)
+
+            R[j] = arr[m + 1 + j];
+
+        int i = 0, j = 0;
+
+        int k = l;
+
+        while (i &lt; n1 &amp;&amp; j &lt; n2) {
+
+            if (L[i] &lt;= R[j]) {
+
+                arr[k] = L[i];
+
+                i++;
+
+            }
+
+            else {
+
+                arr[k] = R[j];
+
+                j++;
+
+            }
+
+            k++;
+
+        }
+
+        while (i &lt; n1) {
+
+            arr[k] = L[i];
+
+            i++;
+
+            k++;
+
+        }
+
+        while (j &lt; n2) {
+
+            arr[k] = R[j];
+
+            j++;
+
+            k++;
+
+        }
+
+    }
+
+    void sort(int arr[], int l, int r) {
+
+        if (l &lt; r) {
+
+            int m = (l + r) / 2;
+
+            sort(arr, l, m);
+
+            sort(arr, m + 1, r);
+
+            merge(arr, l, m, r);
+
+        }
+
+    }
+
+    void display(int arr[]) {
+
+        for (int i : arr)
+
+            System.out.print(i + &quot; &quot;);
+
+    }
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter number of elements: &quot;);
+
+        int n = sc.nextInt();
+
+        int arr[] = new int[n];
+
+        System.out.println(&quot;Enter Elements:&quot;);
+
+        for (int i = 0; i &lt; n; i++)
+
+            arr[i] = sc.nextInt();
+
+        MergeSort ob = new MergeSort();
+
+        ob.sort(arr, 0, n - 1);
+
+        System.out.println(&quot;Sorted Array:&quot;);
+
+        ob.display(arr);
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>MergeSort.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac MergeSort.java</code> <button class="copy sm" data-c="javac MergeSort.java">copy</button></div>
+<div><b>3.</b> <code>java MergeSort</code> <button class="copy sm" data-c="java MergeSort">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter number of elements: 5
+Enter Elements:
+64
+25
+12
+22
+11
+Sorted Array:
+11 12 22 25 64 </pre></details>
+</div><div class="prog">
+<div class="bar"><span class="fn">QuickSort.java</span><button class="copy" data-t="code">Copy code</button></div>
+<pre class="code"><code>import java.util.Scanner;
+
+public class QuickSort {
+
+    int partition(int arr[], int low, int high) {
+
+        int pivot = arr[high];
+
+        int i = low - 1;
+
+        for (int j = low; j &lt; high; j++) {
+
+            if (arr[j] &lt; pivot) {
+
+                i++;
+
+                int temp = arr[i];
+
+                arr[i] = arr[j];
+
+                arr[j] = temp;
+
+            }
+
+        }
+
+        int temp = arr[i + 1];
+
+        arr[i + 1] = arr[high];
+
+        arr[high] = temp;
+
+        return i + 1;
+
+    }
+
+    void quickSort(int arr[], int low, int high) {
+
+        if (low &lt; high) {
+
+            int pi = partition(arr, low, high);
+
+            quickSort(arr, low, pi - 1);
+
+            quickSort(arr, pi + 1, high);
+
+        }
+
+    }
+
+    void display(int arr[]) {
+
+        for (int i : arr)
+
+            System.out.print(i + &quot; &quot;);
+
+    }
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print(&quot;Enter number of elements: &quot;);
+
+        int n = sc.nextInt();
+
+        int arr[] = new int[n];
+
+        System.out.println(&quot;Enter Elements:&quot;);
+
+        for (int i = 0; i &lt; n; i++)
+
+            arr[i] = sc.nextInt();
+
+        QuickSort obj = new QuickSort();
+
+        obj.quickSort(arr, 0, n - 1);
+
+        System.out.println(&quot;Sorted Array:&quot;);
+
+        obj.display(arr);
+
+    }
+
+}
+</code></pre>
+<div class="run"><div><b>1.</b> Save as <code>QuickSort.java</code> in one folder, open Command Prompt there.</div>
+<div><b>2.</b> <code>javac QuickSort.java</code> <button class="copy sm" data-c="javac QuickSort.java">copy</button></div>
+<div><b>3.</b> <code>java QuickSort</code> <button class="copy sm" data-c="java QuickSort">copy</button></div></div>
+<details><summary>Sample output (from a real run)</summary><pre class="out">Enter number of elements: 5
+Enter Elements:
+64
+25
+12
+22
+11
+Sorted Array:
+11 12 22 25 64 </pre></details>
+</div></section></main>
+<footer>All programs were compiled and run on JDK 21 with the sample inputs shown. Needs JDK (javac) installed on your PC.</footer>
+<script>
+function fallback(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a)}
+function doCopy(t,b){var old=b.textContent;function ok(){b.textContent='Copied ✓';setTimeout(function(){b.textContent=old},1400)}
+try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){fallback(t);ok()});return}}catch(e){}fallback(t);ok()}
+document.addEventListener('click',function(e){var b=e.target.closest('button.copy');if(!b)return;
+var t=b.dataset.c||b.closest('.prog').querySelector('pre.code').textContent;doCopy(t,b)});
+</script></body></html>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(function (error) {
+        console.log("Offline support could not be registered:", error);
+      });
+  });
+}
+</script>
